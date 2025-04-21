@@ -20,7 +20,7 @@ public class GroundSensor : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        if(collider.gameObject.layer == 3)
+        if(collider.gameObject.layer == 3 || collider.gameObject.CompareTag("Dragon"))
         {
             _isGrounded = true;
         }
@@ -28,7 +28,7 @@ public class GroundSensor : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if(collider.gameObject.layer == 3)
+        if(collider.gameObject.layer == 3 || collider.gameObject.CompareTag("Dragon"))
         {
             _isGrounded = false;
         }

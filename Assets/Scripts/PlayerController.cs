@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float saruJump = 20;
     public float saruSprint = 1;
 
+    
+
     private Rigidbody2D _rigidBody;
     private GroundSensor _groundSensor;
     private Animator _animator;
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
         Sprint();
 
         Jump();
+
+        //Dash();
         
     }
 
@@ -84,6 +88,19 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetBool("IsRunning", false);
         }
+
+        
         
     }
+    
+
+        
+    
+    /*void Dash()
+    {
+        if(Input.GetButtonDown("Dash"))
+        {
+            _rigidBody.AddForce(Vector2. * saruJump, ForceMode2D.Impulse);
+        }
+    }*/
 }
