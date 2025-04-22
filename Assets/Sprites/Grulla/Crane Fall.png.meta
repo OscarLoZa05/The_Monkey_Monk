@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b02f82f742dd93a4a8600f8201d99bbc
+guid: 3b52685d3fb80f146a545bed56e75b54
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,17 +93,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey Shoot_0
+      name: Crane Fall_0
       rect:
         serializedVersion: 2
-        x: 13
+        x: 7
         y: 9
-        width: 36
-        height: 46
+        width: 52
+        height: 55
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44b6c4e8cfb23b149aa6551e885f91ae
-      internalID: -309281211
+      spriteID: e891049fbf3dea744b7b43af41621d7d
+      internalID: 421111341
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Shoot_1
+      name: Crane Fall_1
       rect:
         serializedVersion: 2
-        x: 72
-        y: 9
-        width: 47
-        height: 46
+        x: 71
+        y: 10
+        width: 52
+        height: 52
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 493be19c2945fce4cb18884d033c22bb
-      internalID: -71177974
+      spriteID: fb62ad7a899864345a1d5eecde372ed2
+      internalID: 1678265583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Shoot_2
+      name: Crane Fall_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 9
-        width: 37
-        height: 46
+        x: 132
+        y: 10
+        width: 52
+        height: 52
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,71 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53dfad65664191748ac5d852c6b66e62
-      internalID: 2010899339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Shoot_3
-      rect:
-        serializedVersion: 2
-        x: 205
-        y: 9
-        width: 36
-        height: 46
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25f8af17b0702df46bdb203bdc8426cd
-      internalID: -1005441646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Shoot_4
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 9
-        width: 47
-        height: 46
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b8ecfa22128aca488be13dcca3ad103
-      internalID: -643388142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Shoot_5
-      rect:
-        serializedVersion: 2
-        x: 333
-        y: 9
-        width: 37
-        height: 46
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 847636e78292a924cabc7802fc12daf3
-      internalID: 2129368051
+      spriteID: 1d50637cf88c18b4eabb4f86aa4be62d
+      internalID: -1746375842
       vertices: []
       indices: 
       edges: []
@@ -233,12 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Monkey Shoot_0: -309281211
-      Monkey Shoot_1: -71177974
-      Monkey Shoot_2: 2010899339
-      Monkey Shoot_3: -1005441646
-      Monkey Shoot_4: -643388142
-      Monkey Shoot_5: 2129368051
+      Crane Fall_0: 421111341
+      Crane Fall_1: 1678265583
+      Crane Fall_2: -1746375842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

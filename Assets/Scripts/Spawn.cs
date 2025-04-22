@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    private Rigidbody2D _rigidBody;
+    /*private Rigidbody2D _rigidBody;
     public PlayerController _playerController;
 
     public Transform _dragonSpawn;
@@ -36,5 +36,5 @@ public class Spawn : MonoBehaviour
         {
             Instantiate(_dragonPrefab, _dragonSpawn.poition)
         }
-    }
+    }*/
 }

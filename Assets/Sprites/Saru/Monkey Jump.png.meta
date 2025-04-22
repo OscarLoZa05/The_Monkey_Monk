@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b29c6f01a7e32e4380760e9001e2696
+guid: a68ff9ec2e7d7d346ad2d92eb42b86e2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 18
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -98,7 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -110,190 +110,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Suelo Monta\xF1a_0"
+      name: Monkey Jump_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 14
-        width: 35
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 3, y: 0, z: 0, w: 32}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 101f06f44f4423d4b97892cd3f36494a
-      internalID: 740106709
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Suelo Monta\xF1a_1"
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 14
-        width: 32
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7638d72586040fa4eb6aa8741099736c
-      internalID: -207687052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Suelo Monta\xF1a_2"
-      rect:
-        serializedVersion: 2
-        x: 73
-        y: 14
-        width: 36
-        height: 32
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 4, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 082a2d3f076bbd1409c0d541ae37cf26
-      internalID: 1539370442
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Suelo Monta\xF1a_3"
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 46
-        width: 34
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 2, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42ff3e43dbd4d164e8203035f00ba701
-      internalID: 1124519952
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Suelo Monta\xF1a_4"
-      rect:
-        serializedVersion: 2
-        x: 2
-        y: 78
-        width: 35
+        x: 8
+        y: 9
+        width: 44
         height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 3, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39e8123f5751a984bad84eccf8360283
-      internalID: 1826844786
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "Suelo Monta\xF1a_5"
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 46
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c07eb84b8cd28f24294bcbd0ca9b26f7
-      internalID: -1341812622
+      spriteID: b3b7a111085cce94ca1fa244c43e7726
+      internalID: 2086756255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Suelo Monta\xF1a_6"
+      name: Monkey Jump_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 78
-        width: 32
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 70
+        y: 9
+        width: 44
+        height: 43
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 954ff54cf1b5604498dff14b1588503c
-      internalID: 81047502
+      spriteID: 1439bd153688dc0449ebaa0096452d97
+      internalID: -1948627917
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Suelo Monta\xF1a_7"
+      name: Monkey Jump_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 46
-        width: 35
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 3, w: 0}
+        x: 136
+        y: 11
+        width: 44
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f81282303a6aef4ba13da3f3baaf2e3
-      internalID: -2093687383
+      spriteID: 7a073e2d84560b2458e3ee079d467872
+      internalID: -1936415437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "Suelo Monta\xF1a_8"
+      name: Monkey Jump_3
       rect:
         serializedVersion: 2
-        x: 73
-        y: 78
-        width: 35
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 3, w: 0}
+        x: 198
+        y: 9
+        width: 44
+        height: 43
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe84471687ac34c4f96d5e68bc6d4e12
-      internalID: 1323493323
+      spriteID: 85fa747a51b141040916a23a198a43a5
+      internalID: -398791212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monkey Jump_4
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 9
+        width: 44
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab4bd1721810352438251fed6fe354bc
+      internalID: -1345646670
       vertices: []
       indices: 
       edges: []
@@ -309,15 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Suelo Monta\xF1a_0": 740106709
-      "Suelo Monta\xF1a_1": -207687052
-      "Suelo Monta\xF1a_2": 1539370442
-      "Suelo Monta\xF1a_3": 1124519952
-      "Suelo Monta\xF1a_4": 1826844786
-      "Suelo Monta\xF1a_5": -1341812622
-      "Suelo Monta\xF1a_6": 81047502
-      "Suelo Monta\xF1a_7": -2093687383
-      "Suelo Monta\xF1a_8": 1323493323
+      Monkey Jump_0: 2086756255
+      Monkey Jump_1: -1948627917
+      Monkey Jump_2: -1936415437
+      Monkey Jump_3: -398791212
+      Monkey Jump_4: -1345646670
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

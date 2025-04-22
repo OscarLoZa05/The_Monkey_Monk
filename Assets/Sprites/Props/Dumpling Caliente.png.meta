@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3b52685d3fb80f146a545bed56e75b54
+guid: 2cda406f8b3348f41a5b7de177a4c283
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,17 +93,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crane Fall_0
+      name: Dumpling Caliente_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 9
-        width: 52
-        height: 55
+        x: 4
+        y: 5
+        width: 24
+        height: 22
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e891049fbf3dea744b7b43af41621d7d
-      internalID: 421111341
+      spriteID: 910c7e6e05210f143a9b11f07ce6ca7d
+      internalID: 69349581
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crane Fall_1
+      name: Dumpling Caliente_1
       rect:
         serializedVersion: 2
-        x: 71
-        y: 10
-        width: 52
-        height: 52
+        x: 36
+        y: 5
+        width: 24
+        height: 24
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb62ad7a899864345a1d5eecde372ed2
-      internalID: 1678265583
+      spriteID: 8c2fadf073138f24b9cd9338120d5220
+      internalID: -470491191
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crane Fall_2
+      name: Dumpling Caliente_2
       rect:
         serializedVersion: 2
-        x: 132
-        y: 10
-        width: 52
-        height: 52
+        x: 68
+        y: 5
+        width: 24
+        height: 25
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d50637cf88c18b4eabb4f86aa4be62d
-      internalID: -1746375842
+      spriteID: 5efbde80f3f6be74eb97cde6ec248f83
+      internalID: 93862422
       vertices: []
       indices: 
       edges: []
@@ -170,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Crane Fall_0: 421111341
-      Crane Fall_1: 1678265583
-      Crane Fall_2: -1746375842
+      Dumpling Caliente_0: 69349581
+      Dumpling Caliente_1: -470491191
+      Dumpling Caliente_2: 93862422
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
