@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
-    [Header("Movement")]
-    private float inputHorizontal;
+    private float _inputHorizontal;
 
+    [Header("Movement")]
     public float saruSpeed = 7;
-    public float saruJump = 8;
     public float saruSprint = 1;
+    
+    [Header("Jump")]
     public bool doubleJump = true;
+    public float saruJump = 12;
 
     [Header("Dash")]
     [SerializeField] private float _dashForce = 20;
@@ -44,15 +45,21 @@ public class PlayerController : MonoBehaviour
         {
             return;
         } 
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
+
+        _inputHorizontal = Input.GetAxisRaw("Horizontal");
 
         Movement();
         
         Sprint();
 
-        Jump();
-
-        DoubleJump();
+        if(Input.GetButtonDown("Jump"))
+        {
+            if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
+            {
+                Jump();
+            }
+            
+        }
 
         //Condicion del Dash
         if(Input.GetButtonDown("Dash") && _canDash)
@@ -71,8 +78,10 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        _rigidBody.velocity = new Vector2(inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
+        _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
     }
+
+
 
 
  
@@ -92,21 +101,13 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded)
+        if(!_groundSensor.isGrounded)
         {
-            _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
-            _animator.SetBool("IsJumping", true);
-        }
-    }
-
-    void DoubleJump()
-    {
-        if(Input.GetButtonDown("Jump") && !_groundSensor.isGrounded && doubleJump)
-        {
+            _groundSensor.canDoubleJump = false;
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
-            _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
-            doubleJump = false;
+
         }
+        _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
     }
 
     void Movement()
@@ -114,15 +115,15 @@ public class PlayerController : MonoBehaviour
 
         _animator.SetBool("IsJumping", !_groundSensor.isGrounded); 
 
-        if(inputHorizontal > 0)
+        if(_inputHorizontal > 0)
         {
-            _rigidBody.velocity = new Vector2(inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
+            _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
             _animator.SetBool("IsRunning", true);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        else if(inputHorizontal < 0)
+        else if(_inputHorizontal < 0)
         {
-            _rigidBody.velocity = new Vector2(inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
+            _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
             _animator.SetBool("IsRunning", true);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
