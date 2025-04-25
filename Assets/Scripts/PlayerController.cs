@@ -5,9 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     
-    public float saruSpeed = 5;
+    [Header("Movement")]
+    private float inputHorizontal;
+
+    public float saruSpeed = 7;
     public float saruJump = 8;
     public float saruSprint = 1;
+    public bool doubleJump = true;
+
+    [Header("Dash")]
+    [SerializeField] private float _dashForce = 20;
+    [SerializeField] private float _dashDuration = 0.2f;
+    [SerializeField] private float _dashCoolDown = 2f;
+    private bool _canDash = true;
+    private bool _isDashing = false;
 
     
 
@@ -15,9 +26,9 @@ public class PlayerController : MonoBehaviour
     private GroundSensor _groundSensor;
     private Animator _animator;
 
-    private float inputHorizontal;
+    
 
-    public bool doubleJump = true;
+    
 
 
     void Awake()
@@ -29,6 +40,10 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+        if(_isDashing)
+        {
+            return;
+        } 
         inputHorizontal = Input.GetAxisRaw("Horizontal");
 
         Movement();
@@ -39,12 +54,23 @@ public class PlayerController : MonoBehaviour
 
         DoubleJump();
 
-        //Dash();
+        //Condicion del Dash
+        if(Input.GetButtonDown("Dash") && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+        
+
         
     }
 
     void FixedUpdate()
     {        
+        if(_isDashing)
+        {
+            return;
+        }
         _rigidBody.velocity = new Vector2(inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
     }
 
@@ -112,9 +138,18 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Dash()
     {
-        if(Input.GetButtonDown("Dash"))
-        {
-            _rigidBody.AddForce(transform.right * saruJump, ForceMode2D.Impulse);
-        }
+        float gravity = _rigidBody.gravityScale;
+        _rigidBody.gravityScale = 0;
+        _rigidBody.velocity = new Vector2(_rigidBody.velocity.x ,0); 
+        
+        
+        _isDashing = true;
+        _canDash = false;
+        _rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(_dashDuration);
+        _rigidBody.gravityScale = gravity;
+        _isDashing = false;
+        yield return new WaitForSeconds(_dashCoolDown);
+        _canDash = true;
     }
 }
