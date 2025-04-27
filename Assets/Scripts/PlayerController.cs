@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
     [Header("Jump")]
     public bool doubleJump = true;
     public float saruJump = 12;
+    public float weakJump = 0.9f;
+    
+    [Header("Cloud")]
+    [SerializeField] private Transform kintonSpawn;
+    [SerializeField] private GameObject kintonPrefab;
 
     [Header("Dash")]
     [SerializeField] private float _dashForce = 20;
@@ -21,11 +26,27 @@ public class PlayerController : MonoBehaviour
     private bool _canDash = true;
     private bool _isDashing = false;
 
+    [Header("Clon")]
+    [SerializeField] private Transform _clonSpawn;
+    [SerializeField] private GameObject _clonPrefab;
+    [SerializeField] private bool _isCloned;
+
+    [Header("Ground")]
+    [SerializeField] private LayerMask _ground;
+    [SerializeField] private bool _isGrounded;
+    [SerializeField] private bool _canDoubleJump = true;
+    [SerializeField] private float _groundRadius = 1; 
+    [SerializeField] private Transform _groundSpawn;
+
+
+
+
     
 
     private Rigidbody2D _rigidBody;
     private GroundSensor _groundSensor;
     private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
 
     
 
@@ -37,10 +58,13 @@ public class PlayerController : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _groundSensor = GetComponentInChildren<GroundSensor>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     
     void Update()
     {
+
+        //Bloqueo de Inputs mientras se Dashea
         if(_isDashing)
         {
             return;
@@ -52,13 +76,25 @@ public class PlayerController : MonoBehaviour
         
         Sprint();
 
+        Clon();
+
+        //Fuerza de salto
+        if(_groundSensor.isGrounded)
+        {
+            saruJump = 12;
+        }
+        else
+        {
+            saruJump = 12*weakJump;
+        }
+
+        //Condiciones del Salto
         if(Input.GetButtonDown("Jump"))
         {
             if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
             {
                 Jump();
             }
-            
         }
 
         //Condicion del Dash
@@ -66,27 +102,21 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
-
-        
-
         
     }
-
     void FixedUpdate()
-    {        
+    {   
+
         if(_isDashing)
         {
             return;
         }
         _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
     }
-
-
-
-
  
-    //Lista de acciones
 
+
+    //Lista de acciones
     void Sprint()
     {
         if(Input.GetButton("Sprint") && _groundSensor.isGrounded)
@@ -105,14 +135,13 @@ public class PlayerController : MonoBehaviour
         {
             _groundSensor.canDoubleJump = false;
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
-
+            Instantiate(kintonPrefab.gameObject, kintonSpawn.position, kintonSpawn.rotation);
         }
         _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
     }
 
     void Movement()
     {
-
         _animator.SetBool("IsJumping", !_groundSensor.isGrounded); 
 
         if(_inputHorizontal > 0)
@@ -130,12 +159,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.SetBool("IsRunning", false);
-        }
-
-        
-        
+        }        
     }
-
 
     IEnumerator Dash()
     {
@@ -145,12 +170,42 @@ public class PlayerController : MonoBehaviour
         
         
         _isDashing = true;
+        _animator.SetBool("IsDashing", true);
         _canDash = false;
         _rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
         yield return new WaitForSeconds(_dashDuration);
+
         _rigidBody.gravityScale = gravity;
         _isDashing = false;
+        _animator.SetBool("IsDashing", false);
         yield return new WaitForSeconds(_dashCoolDown);
+
         _canDash = true;
     }
+
+    void Clon()
+    {
+        if(Input.GetButtonDown("Clon"))
+        {
+            _rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
+            Instantiate(_clonPrefab.gameObject, _clonSpawn.position, _clonSpawn.rotation);
+            _isCloned = true;
+        }
+    }
+
+    /*void Ground()
+    {
+        Collider2D = Physics2D.OverlapCircleAll(_groundSpawn.position, _groundRadius, _ground);
+        {
+            _isGrounded = true;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+
+        Gizmos.DrawWireSphere(_groundSpawn.position, _groundRadius);
+    }*/
 }

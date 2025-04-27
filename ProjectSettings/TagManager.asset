@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dragon
+  - Grulla
   layers:
   - Default
   - TransparentFX

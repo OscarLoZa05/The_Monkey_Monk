@@ -7,6 +7,7 @@ public class GrullaTrap : MonoBehaviour
 
     public float plumillaSpeed = 4;
     public float plumillaDirection = 1;
+    public float plumillaCaida = 1;
 
     private Rigidbody2D _rigidBody;
     private BoxCollider2D _boxCollider;
@@ -23,7 +24,11 @@ public class GrullaTrap : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             plumillaDirection *= -1;
+        }
 
+        if(collider.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(Fall());
         }
     }
     
@@ -36,5 +41,14 @@ public class GrullaTrap : MonoBehaviour
     {
         _rigidBody.velocity = new Vector2(plumillaSpeed * plumillaDirection, _rigidBody.velocity.y);
     }
+
+    IEnumerator Fall()
+    {
+        _rigidBody.gravityScale = 2;
+        yield return new WaitForSeconds(plumillaCaida);
+        plumillaSpeed = 0;
+    }
+
+    
 
 }
