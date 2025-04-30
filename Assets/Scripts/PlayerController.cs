@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _attackRadius = 1;
     [SerializeField] private LayerMask _enemyLayer;
     
+    [Header("Shoot")]
+    [SerializeField] private GameObject _bananaPrefab;
+    [SerializeField] private Transform _bananaSpawn;
+
     //Componentes Inspector
     private Rigidbody2D _rigidBody;
     private GroundSensor _groundSensor;
@@ -79,6 +83,11 @@ public class PlayerController : MonoBehaviour
         Sprint();
 
         Clon();
+
+        if(Input.GetButtonDown("Shoot"))
+        {
+            Shoot();
+        }
 
         //Fuerza de salto
         if(_groundSensor.isGrounded)
@@ -233,5 +242,11 @@ public class PlayerController : MonoBehaviour
         //Gizmos.DrawWireBox(_groundSpawn.position, _groundRadius);
         Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
+
+    void Shoot()
+    {
+        Instantiate(_bananaPrefab, _bananaSpawn.position, _bananaSpawn.rotation);
+    }
+    
 
 }

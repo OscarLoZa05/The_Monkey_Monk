@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Dragon
   - Grulla
+  - Cloud
   layers:
   - Default
   - TransparentFX

@@ -130,6 +130,7 @@ Transform:
   m_Children:
   - {fileID: 8601442930328864655}
   - {fileID: 3254372592104708991}
+  - {fileID: 5410406282848263952}
   - {fileID: 5826229973383242957}
   - {fileID: 2950383119289801523}
   - {fileID: 996048803437397283}
@@ -201,7 +202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saruSpeed: 7
   saruSprint: 1
-  _isDead: 0
   doubleJump: 1
   saruJump: 12
   weakJump: 0.9
@@ -210,7 +210,7 @@ MonoBehaviour:
   _dashForce: 20
   _dashDuration: 0.2
   _dashCoolDown: 2
-  _clonSpawn: {fileID: 3254372592104708991}
+  _clonSpawn: {fileID: 8601442930328864655}
   _clonPrefab: {fileID: 1213845939530349835}
   _isCloned: 0
   _ground:
@@ -219,13 +219,13 @@ MonoBehaviour:
   _isGrounded: 0
   _canDoubleJump: 1
   _groundRadius: 1
-  _groundSpawn: {fileID: 0}
+  _groundSpawn: {fileID: 5597699848347372511}
   _isNormalAttacking: 0
   _hitBoxPosition: {fileID: 996048803437397283}
   _attackRadius: 1
   _enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!50 &3809804042595133747
 Rigidbody2D:
   serializedVersion: 4
@@ -429,6 +429,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1456276575533380586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5410406282848263952}
+  m_Layer: 0
+  m_Name: Banana Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5410406282848263952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456276575533380586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: 1.250001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5597699848347372511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2735367953322460481
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2950383119289801523
 Transform:
   m_ObjectHideFlags: 0
@@ -5335,7 +5366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3254372592104708991}
   m_Layer: 0
-  m_Name: Clon
+  m_Name: Clon Spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
