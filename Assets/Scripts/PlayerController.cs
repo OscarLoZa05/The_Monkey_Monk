@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     private float _inputHorizontal;
 
     [Header("Movement")]
-    public float saruSpeed = 7;
-    public float saruSprint = 1;
+    [SerializeField] public float saruSpeed = 7;
+    [SerializeField] public float saruSprint = 1;
     
     [Header("Jump")]
     public bool doubleJump = true;
@@ -38,20 +38,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _groundRadius = 1; 
     [SerializeField] private Transform _groundSpawn;
 
-
-
-
+    [Header("Attack")]
+    [SerializeField] private bool _isNormalAttacking = false;
+    [SerializeField] private Transform _hitBoxPosition;
+    [SerializeField] private float _attackRadius = 1;
+    [SerializeField] private LayerMask _enemyLayer;
     
-
+    //Componentes Inspector
     private Rigidbody2D _rigidBody;
     private GroundSensor _groundSensor;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
-
-    
-
-    
-
 
     void Awake()
     {
@@ -63,6 +60,11 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
+
+        if(_isNormalAttacking)
+        {
+            return;
+        }
 
         //Bloqueo de Inputs mientras se Dashea
         if(_isDashing)
@@ -86,6 +88,12 @@ public class PlayerController : MonoBehaviour
         else
         {
             saruJump = 12*weakJump;
+        }
+
+        //Condiciones del Golpe
+        if(Input.GetButtonDown("Attack"))
+        {
+            NormalAttack();
         }
 
         //Condiciones del Salto
@@ -113,7 +121,8 @@ public class PlayerController : MonoBehaviour
         }
         _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
     }
- 
+
+
 
 
     //Lista de acciones
@@ -195,17 +204,34 @@ public class PlayerController : MonoBehaviour
 
     /*void Ground()
     {
-        Collider2D = Physics2D.OverlapCircleAll(_groundSpawn.position, _groundRadius, _ground);
+        Collision2D[] collision = Physics2D.OverlapBox(_groundSpawn.position, _groundRadius, _ground);
+        foreach(Collision2D groundeded in collision)
         {
             _isGrounded = true;
+        }
+    }*/
+
+    public void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    void NormalAttack()
+    {
+        _animator.SetTrigger("IsAttacking");
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
+        foreach(Collider2D enemy in enemies)
+        {
+
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.yellow;
 
+        //Gizmos.DrawWireBox(_groundSpawn.position, _groundRadius);
+        Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
+    }
 
-        Gizmos.DrawWireSphere(_groundSpawn.position, _groundRadius);
-    }*/
 }

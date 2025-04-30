@@ -8,7 +8,7 @@ public class CloudKinton : MonoBehaviour
     [SerializeField] private float _timer = 2f;
     [SerializeField] private float _timerDestroy = 4f;
     private SpriteRenderer _spriteRenderer;
-    [SerializeField] private BoxCollider2D _boxCollider;
+    private BoxCollider2D _boxCollider;
     
 
     void Awake()

@@ -11,8 +11,10 @@ public class CameraController : MonoBehaviour
     public float interpolationRatio = 0.15f;
 
 
+
     void FixedUpdate()
     {
+
         Vector3 desiredPosition = playerTransform.position + offset;
         float clampX = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);
         float clampY = Mathf.Clamp(desiredPosition.y, minPosition.y, maxPosition.y);

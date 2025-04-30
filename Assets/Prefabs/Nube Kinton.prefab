@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6695972284794116680}
   - component: {fileID: 3554039200981630554}
   - component: {fileID: -7096685788950194632}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Nube Kinton
-  m_TagString: Untagged
+  m_TagString: Cloud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
