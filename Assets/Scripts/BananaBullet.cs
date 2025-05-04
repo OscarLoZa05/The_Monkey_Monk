@@ -6,11 +6,18 @@ using UnityEngine;
 public class BananaBullet : MonoBehaviour
 {
     public float speed = -300;
+    [SerializeField] private float _bananaSpeed = 10; 
     
+    private Rigidbody2D _rigidBody;
+
+    void Awake()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
-        _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
+        _rigidBody.velocity = new Vector2(_bananaSpeed, _rigidBody.velocity.y);
     }
     
     void FixedUpdate()

@@ -23,20 +23,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _dashForce = 20;
     [SerializeField] private float _dashDuration = 0.2f;
     [SerializeField] private float _dashCoolDown = 2f;
-    private bool _canDash = true;
-    private bool _isDashing = false;
+    [SerializeField] private bool _canDash = true;
+    [SerializeField] private bool _isDashing = false;
 
     [Header("Clon")]
     [SerializeField] private Transform _clonSpawn;
     [SerializeField] private GameObject _clonPrefab;
     [SerializeField] private bool _isCloned;
 
-    [Header("Ground")]
+    /*[Header("Ground")]
     [SerializeField] private LayerMask _ground;
     [SerializeField] private bool _isGrounded;
     [SerializeField] private bool _canDoubleJump = true;
     [SerializeField] private float _groundRadius = 1; 
-    [SerializeField] private Transform _groundSpawn;
+    [SerializeField] private Transform _groundSpawn;*/
 
     [Header("Attack")]
     [SerializeField] private bool _isNormalAttacking = false;
@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] private GameObject _bananaPrefab;
     [SerializeField] private Transform _bananaSpawn;
+    [SerializeField] private float _bananaAnimation = 1;
+
+    [Header("Life")]
+    [SerializeField] private float maxHealth = 20;
+    [SerializeField] private float currentHealth;
+    
 
     //Componentes Inspector
     private Rigidbody2D _rigidBody;
@@ -86,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetButtonDown("Shoot"))
         {
-            Shoot();
+            StartCoroutine(Shoot());
         }
 
         //Fuerza de salto
@@ -243,9 +249,17 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
 
-    void Shoot()
+    IEnumerator Shoot()
     {
+        _animator.SetTrigger("IsShooting");
+        yield return new WaitForSeconds(_bananaAnimation);
+
         Instantiate(_bananaPrefab, _bananaSpawn.position, _bananaSpawn.rotation);
+    }
+
+    void TakeDamage()
+    {
+
     }
     
 
