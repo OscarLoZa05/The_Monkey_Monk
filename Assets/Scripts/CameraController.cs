@@ -14,6 +14,10 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(playerTransform == null)
+        {
+            return;
+        }
 
         Vector3 desiredPosition = playerTransform.position + offset;
         float clampX = Mathf.Clamp(desiredPosition.x, minPosition.x, maxPosition.x);

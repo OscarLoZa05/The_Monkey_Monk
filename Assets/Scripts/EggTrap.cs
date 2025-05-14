@@ -29,5 +29,12 @@ public class EggTrap : MonoBehaviour
             Instantiate(_pollito, _eggPostition.position, _eggPostition.rotation);
             Destroy(gameObject);
         }
+
+        if(collision.gameObject.layer == 8)
+        {
+            Destroy(gameObject);
+        }
+
     }
+
 }
