@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour
     [Header("Life")]
     [SerializeField] private float maxHealth = 20;
     [SerializeField] private float currentHealth;
-    [SerializeField] private bool isDead = false;
+    [SerializeField] private float deathDelay = 3; 
+    public bool isDead = false;
    
 
 
@@ -73,10 +74,10 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip _deathSFX;
     public AudioClip _punchSFX;
-    public AudioClip _walkSFX;
     public AudioClip _shootSFX;
     public AudioClip _dashSFX;
     public AudioClip _jumpSFX;
+    //private Pollito _pollitoScript;
 
 
     void Awake()
@@ -88,6 +89,8 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
+        //_pollitoScript = GetComponent<Pollito>();
+        
     }
    
     void Update()
@@ -151,26 +154,22 @@ public class PlayerController : MonoBehaviour
         //Condiciones del Salto
         if(Input.GetButtonDown("Jump"))
         {
+            
             if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
             {
                 Jump();
             }
         }
 
-
         //Condicion del Dash
         if(Input.GetButtonDown("Dash") && _canDash)
         {
             StartCoroutine(Dash());
         }
-
-        
-       
     }
+
     void FixedUpdate()
     {  
-
-
         if(_isDashing)
         {
             return;
@@ -211,12 +210,12 @@ public class PlayerController : MonoBehaviour
     {
         if(!_groundSensor.isGrounded)
         {
-            _audioSource.PlayOneShot(_jumpSFX);
             _groundSensor.canDoubleJump = false;
             _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
             Instantiate(kintonPrefab.gameObject, kintonSpawn.position, kintonSpawn.rotation);
         }
         _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
+        _audioSource.PlayOneShot(_jumpSFX);
     }
 
 
@@ -252,6 +251,7 @@ public class PlayerController : MonoBehaviour
        
        
         _isDashing = true;
+        _audioSource.PlayOneShot(_dashSFX);
         _animator.SetBool("IsDashing", true);
         _canDash = false;
         _rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
@@ -262,8 +262,6 @@ public class PlayerController : MonoBehaviour
         _isDashing = false;
         _animator.SetBool("IsDashing", false);
         yield return new WaitForSeconds(_dashCoolDown);
-
-
         _canDash = true;
     }
 
@@ -304,11 +302,13 @@ public class PlayerController : MonoBehaviour
     void NormalAttack()
     {
         _animator.SetTrigger("IsAttacking");
+        _audioSource.PlayOneShot(_punchSFX);
         Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
         foreach(Collider2D enemy in enemies)
         {
-
-
+            Pollito _pollitoScript = enemy.GetComponent<Pollito>();
+            //_pollitoScript.ChickDeath();
+            StartCoroutine(_pollitoScript.ChickDeath());
         }
     }
 
@@ -327,21 +327,21 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("IsShooting");
         yield return new WaitForSeconds(_bananaAnimation);
-
-
         Instantiate(_bananaPrefab, _bananaSpawn.position, _bananaSpawn.rotation);
+        _audioSource.PlayOneShot(_shootSFX);
     }
 
 
-    void TakeDamage(float damage)
+    /*void TakeDamage(float damage)
     {
        
     }
+    */
 
     IEnumerator DeathSound()
     {
         _audioSource.PlayOneShot(_deathSFX);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(deathDelay);
 
         Destroy(gameObject);
     }

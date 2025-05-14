@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    private PlayerController _playerController;
     public Transform playerTransform;
     public Vector3 offset;
     public Vector2 maxPosition;
     public Vector2 minPosition;
     public float interpolationRatio = 0.15f;
 
+    void Awake()
+    {
+        _playerController = FindObjectOfType<PlayerController>().GetComponent<PlayerController>();
+    }
+
 
 
     void FixedUpdate()
     {
-        if(playerTransform == null)
+        if(playerTransform == null || _playerController.isDead)
         {
             return;
         }

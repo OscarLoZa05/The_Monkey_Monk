@@ -25,6 +25,11 @@ public class MonkAttack : MonoBehaviour
 
     void Update()
     {
+        if(saru == null)
+        {
+            return;
+        }
+
         if(Vector3.Distance(transform.position, saru.position) <= attackRange)
         {
             if(timer >= cooldown)
