@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PlayerController : MonoBehaviour
@@ -53,15 +54,17 @@ public class PlayerController : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] private GameObject _bananaPrefab;
     [SerializeField] private Transform _bananaSpawn;
-    [SerializeField] private float _bananaAnimation = 1;
+    [SerializeField] private float _bananaAnimation = 0.5f;
 
 
     [Header("Life")]
-    [SerializeField] private float maxHealth = 20;
+    private float maxHealth = 4;
+    public bool isDamaged = false;
     [SerializeField] private float currentHealth;
     [SerializeField] private float deathDelay = 3; 
     public bool isDead = false;
-   
+    public float damageImpulse = 5;
+    public Image healthBarImage;
 
 
     //Componentes Inspector
@@ -71,14 +74,14 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private GameManager _gameManager;
+    private MenuManager _menuManager;
+    private WinCondition _winCondition;
     private AudioSource _audioSource;
     public AudioClip _deathSFX;
     public AudioClip _punchSFX;
     public AudioClip _shootSFX;
     public AudioClip _dashSFX;
     public AudioClip _jumpSFX;
-    //private Pollito _pollitoScript;
-
 
     void Awake()
     {
@@ -89,19 +92,37 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         _audioSource = GetComponent<AudioSource>();
-        //_pollitoScript = GetComponent<Pollito>();
-        
+        _menuManager = FindObjectOfType<MenuManager>().GetComponent<MenuManager>();
+        _winCondition = FindObjectOfType<WinCondition>().GetComponent<WinCondition>();
+    }
+
+    void Start()
+    {
+        currentHealth = maxHealth;
     }
    
     void Update()
     {
-
+        //Debug.Log(currentHealth);
+        if (_winCondition.hasWinned)
+        {
+            return;
+        }
+        
+        if (_gameManager.isPaused)
+            {
+                return;
+            }
 
         if(isDead)
         {
             return;
         }
 
+        if(isDamaged)
+        {
+            return;
+        }
 
         if(_isNormalAttacking)
         {
@@ -122,9 +143,6 @@ public class PlayerController : MonoBehaviour
         Movement();
        
         Sprint();
-
-
-        //Clon();
 
 
         if(Input.GetButtonDown("Shoot"))
@@ -166,6 +184,8 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(Dash());
         }
+
+        Death();
     }
 
     void FixedUpdate()
@@ -176,21 +196,6 @@ public class PlayerController : MonoBehaviour
         }
         _rigidBody.velocity = new Vector2(_inputHorizontal * saruSpeed * saruSprint, _rigidBody.velocity.y);
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Chick"))
-        {
-            Death();
-        }
-    }
-
-
-
-
-
-
-
 
     //Lista de acciones
     void Sprint()
@@ -204,7 +209,6 @@ public class PlayerController : MonoBehaviour
             saruSprint = 1;
         }
     }
-
 
     void Jump()
     {
@@ -265,39 +269,13 @@ public class PlayerController : MonoBehaviour
         _canDash = true;
     }
 
-
-    /*void Clon()
-    {
-        if(Input.GetButtonDown("Clon"))
-        {
-            _rigidBody.AddForce(transform.right*_dashForce, ForceMode2D.Impulse);
-            Instantiate(_clonPrefab.gameObject, _clonSpawn.position, _clonSpawn.rotation);
-            _isCloned = true;
-        }
-    }
-    */
-
-
-    /*void Ground()
-    {
-        Collision2D[] collision = Physics2D.OverlapBox(_groundSpawn.position, _groundRadius, _ground);
-        foreach(Collision2D groundeded in collision)
-        {
-            _isGrounded = true;
-        }
-    }*/
-
-
     public void Death()
     {
-        isDead = true;
-        _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
-        _animator.SetTrigger("IsDead");
-        _boxCollider.enabled = false;
-
-        StartCoroutine(DeathSound());
+        if(currentHealth <= 0)
+        {
+            StartCoroutine(MonkeyDeath());
+        }  
     }
-
 
     void NormalAttack()
     {
@@ -307,21 +285,22 @@ public class PlayerController : MonoBehaviour
         foreach(Collider2D enemy in enemies)
         {
             Pollito _pollitoScript = enemy.GetComponent<Pollito>();
+
             //_pollitoScript.ChickDeath();
-            StartCoroutine(_pollitoScript.ChickDeath());
+            if(_pollitoScript != null)
+            {
+                StartCoroutine(_pollitoScript.ChickDeath());
+                _gameManager.AddPoints(_gameManager.pollitoPoints);
+            }
         }
     }
-
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-
-
         //Gizmos.DrawWireBox(_groundSpawn.position, _groundRadius);
         Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
-
 
     IEnumerator Shoot()
     {
@@ -331,21 +310,41 @@ public class PlayerController : MonoBehaviour
         _audioSource.PlayOneShot(_shootSFX);
     }
 
-
-    /*void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-       
+        currentHealth -= damage;
+        _animator.SetTrigger("IsHurt");
+        isDamaged = true;
+        _inputHorizontal = 0;
+        if(currentHealth - damage > 0 && currentHealth - damage != 0)
+        {
+            _rigidBody.AddForce(Vector2.up * damageImpulse, ForceMode2D.Impulse);
+        }
+        StartCoroutine(DamageExit());
+        UpdateHealthBar();
     }
-    */
 
-    IEnumerator DeathSound()
+    IEnumerator DamageExit()
     {
+        float exitTime = 0.5f;
+        yield return new WaitForSeconds(exitTime);
+        isDamaged = false;
+    }
+
+    public IEnumerator MonkeyDeath()
+    {
+        isDead = true;
+        _rigidBody.AddForce(Vector2.up * saruJump, ForceMode2D.Impulse);
+        _animator.SetTrigger("IsDead");
+        _boxCollider.enabled = false;
         _audioSource.PlayOneShot(_deathSFX);
         yield return new WaitForSeconds(deathDelay);
-
+        _menuManager.GameOver();
         Destroy(gameObject);
     }
-   
 
-
+    public void UpdateHealthBar()
+    {
+        healthBarImage.fillAmount = currentHealth / maxHealth;
+    }
 }

@@ -14,6 +14,11 @@ public class EggTrap : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip _eggCrackSFX;
     private SpriteRenderer _spriteRenderer;
+    private float eggDamage = 0.5f;
+    private PlayerController _playerController;
+    public GrullaTrap _grullaDirection;
+    public Transform _grullaRotation;
+    
     
     
     void Awake()
@@ -22,6 +27,7 @@ public class EggTrap : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidBody = GetComponent<Rigidbody2D>();
+        _playerController = FindObjectOfType<PlayerController>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -30,10 +36,11 @@ public class EggTrap : MonoBehaviour
         {
             StartCoroutine(PollitoGenerator());
         }
-
         if(collision.gameObject.layer == 8)
         {
+            _playerController.TakeDamage(eggDamage);
             Destroy(gameObject);
+            //_playerController.Death();
         }
     }
 
@@ -43,10 +50,13 @@ public class EggTrap : MonoBehaviour
         _spriteRenderer.enabled = false;
         _boxCollider.enabled = false;
         _rigidBody.gravityScale = 0;
-        Instantiate(_pollito, _eggPostition.position, _eggPostition.rotation);
+
+        GameObject pollito = Instantiate(_pollito, _eggPostition.position, _grullaRotation.rotation);
+        Pollito _pollitoScript = _pollito.GetComponent<Pollito>();
+        _pollitoScript._grullaTrap = _grullaDirection;
+
         _audioSource.PlayOneShot(_eggCrackSFX);
         yield return new WaitForSeconds(crackDelay);
         Destroy(gameObject);
     }
-
 }
