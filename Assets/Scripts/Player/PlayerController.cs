@@ -54,13 +54,15 @@ public class PlayerController : MonoBehaviour
     [Header("Shoot")]
     [SerializeField] private GameObject _bananaPrefab;
     [SerializeField] private Transform _bananaSpawn;
-    [SerializeField] private float _bananaAnimation = 0.5f;
+    public int _bananaItem = 0;
+    [SerializeField] private float _bananaTimer = 0;
+    [SerializeField] private float _bananaCooldown = 5;
 
 
     [Header("Life")]
-    private float maxHealth = 4;
     public bool isDamaged = false;
-    [SerializeField] private float currentHealth;
+    private float maxHealth = 4;
+    public float currentHealth;
     [SerializeField] private float deathDelay = 3; 
     public bool isDead = false;
     public float damageImpulse = 5;
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        _bananaItem = 0;
     }
    
     void Update()
@@ -144,11 +147,16 @@ public class PlayerController : MonoBehaviour
        
         Sprint();
 
-
-        if(Input.GetButtonDown("Shoot"))
+        _bananaTimer += Time.deltaTime;
+        
+        if(Input.GetButtonDown("Shoot") && _bananaItem != 0 && _bananaTimer >= _bananaCooldown)
         {
-            StartCoroutine(Shoot());
+            ShootAnimation();
+            _bananaTimer = 0;
+            _bananaItem --;
         }
+
+        
 
 
         //Fuerza de salto
@@ -165,7 +173,7 @@ public class PlayerController : MonoBehaviour
         //Condiciones del Golpe
         if(Input.GetButtonDown("Attack"))
         {
-            NormalAttack();
+            NormalAttackAnimation();
         }
 
 
@@ -277,9 +285,13 @@ public class PlayerController : MonoBehaviour
         }  
     }
 
-    void NormalAttack()
+    void NormalAttackAnimation()
     {
         _animator.SetTrigger("IsAttacking");
+    }
+
+    void NormalAttack()
+    {
         _audioSource.PlayOneShot(_punchSFX);
         Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
         foreach(Collider2D enemy in enemies)
@@ -302,10 +314,14 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(_hitBoxPosition.position, _attackRadius);
     }
 
-    IEnumerator Shoot()
+    void ShootAnimation()
     {
         _animator.SetTrigger("IsShooting");
-        yield return new WaitForSeconds(_bananaAnimation);
+        
+    }
+
+    void Shoot()
+    {
         Instantiate(_bananaPrefab, _bananaSpawn.position, _bananaSpawn.rotation);
         _audioSource.PlayOneShot(_shootSFX);
     }

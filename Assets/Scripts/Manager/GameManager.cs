@@ -17,9 +17,12 @@ public class GameManager : MonoBehaviour
     public int pollitoPoints = 100;
     public int coinsPoints = 50;
 
+    private WinCondition _winCondition;
+
     void Awake()
     {
-        _soundManager = FindObjectOfType<SoundManager>();
+        _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
+        _winCondition = FindObjectOfType<WinCondition>().GetComponent<WinCondition>();
     }
 
     void Start()
@@ -32,7 +35,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if(Input.GetButtonDown("Pause"))
+        if(Input.GetButtonDown("Pause") && !_winCondition.hasWinned)
         {
             Pause();
         }
