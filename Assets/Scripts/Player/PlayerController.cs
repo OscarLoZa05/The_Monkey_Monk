@@ -295,15 +295,22 @@ public class PlayerController : MonoBehaviour
     {
         _audioSource.PlayOneShot(_punchSFX);
         Collider2D[] enemies = Physics2D.OverlapCircleAll(_hitBoxPosition.position, _attackRadius, _enemyLayer);
-        foreach(Collider2D enemy in enemies)
+        foreach (Collider2D enemy in enemies)
         {
             Pollito _pollitoScript = enemy.GetComponent<Pollito>();
 
-            //_pollitoScript.ChickDeath();
-            if(_pollitoScript != null)
+            if (_pollitoScript != null)
             {
                 StartCoroutine(_pollitoScript.ChickDeath());
                 _gameManager.AddPoints(_gameManager.pollitoPoints);
+            }
+
+            MouseMovement _mouseMovement = enemy.GetComponent<MouseMovement>();
+
+            if (_mouseMovement != null)
+            {
+                StartCoroutine(_mouseMovement.MouseDeath());
+                _gameManager.AddPoints(_mouseMovement._mousePoints);
             }
         }
     }

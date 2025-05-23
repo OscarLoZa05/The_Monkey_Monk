@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12132b782160f84991438bfb95156ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dumplingSFX: {fileID: 8300000, guid: d73a09dd622ded6419d46f2f89f379ac, type: 3}
+  _dumplingSFX: {fileID: 8300000, guid: 2516d27179f583743854aa13a36d50d4, type: 3}
 --- !u!82 &7324890897736512638
 AudioSource:
   m_ObjectHideFlags: 0
@@ -179,7 +179,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0

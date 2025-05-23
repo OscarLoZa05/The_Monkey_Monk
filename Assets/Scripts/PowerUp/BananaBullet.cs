@@ -29,21 +29,28 @@ public class BananaBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.layer == 3)
+        if (collider.gameObject.layer == 3)
         {
             BananaDeath();
         }
-        if(collider.gameObject.layer == 6)
+        if (collider.gameObject.layer == 6)
         {
             //llamar la función de muerte o de daño para enemigos
         }
-        if(collider.gameObject.CompareTag("Chick"))
+        if (collider.gameObject.CompareTag("Chick"))
         {
             Pollito chickScript = collider.gameObject.GetComponent<Pollito>();
             StartCoroutine(chickScript.ChickDeath());
             _gameManager.AddPoints(_gameManager.pollitoPoints);
             BananaDeath();
         }
+        /*if (collider.gameObject.CompareTag("Mouse"))
+        {
+            MouseMovement _mouseScript = collider.gameObject.GetComponent<MouseMovement>();
+            StartCoroutine(_mouseScript.MouseDeath());
+            _gameManager.AddPoints(_mouseScript._mousePoints);
+            BananaDeath();
+        }*/
     }
 
     void BananaDeath()
