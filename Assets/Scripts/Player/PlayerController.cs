@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         _bananaItem = 0;
+        _bananaTimer = 5;
     }
    
     void Update()
