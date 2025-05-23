@@ -9,10 +9,12 @@ public class BananaBullet : MonoBehaviour
     [SerializeField] private float _bananaSpeed = 10; 
     
     private Rigidbody2D _rigidBody;
+    private GameManager _gameManager;
 
     void Awake()
     {
         _rigidBody = GetComponent<Rigidbody2D>();
+        _gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
     }
 
     void Start()
@@ -34,6 +36,13 @@ public class BananaBullet : MonoBehaviour
         if(collider.gameObject.layer == 6)
         {
             //llamar la función de muerte o de daño para enemigos
+        }
+        if(collider.gameObject.CompareTag("Chick"))
+        {
+            Pollito chickScript = collider.gameObject.GetComponent<Pollito>();
+            StartCoroutine(chickScript.ChickDeath());
+            _gameManager.AddPoints(_gameManager.pollitoPoints);
+            BananaDeath();
         }
     }
 

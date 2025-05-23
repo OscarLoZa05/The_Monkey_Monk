@@ -324,6 +324,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         Instantiate(_bananaPrefab, _bananaSpawn.position, _bananaSpawn.rotation);
+        _gameManager.RemoveBanana();
         _audioSource.PlayOneShot(_shootSFX);
     }
 

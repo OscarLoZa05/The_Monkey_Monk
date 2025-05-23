@@ -36,6 +36,7 @@ public class BananaGrab : MonoBehaviour
     IEnumerator Banana()
     {
         _playerController._bananaItem ++;
+        _gameManager.AddBanana();
         _gameManager.AddPoints(_bananaPoints);
         _spriteRenderer.enabled = false;
         _boxCollider.enabled = false;
